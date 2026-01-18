@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+
+{% block title %}Lista de Repuestos - LIAN REPUESTOS{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2><i class="material-icons">build</i> Gestión de Repuestos</h2>
+        <a href="{{ url_for('repuestos.crear') }}" class="btn btn-success">
+            <i class="material-icons">add_circle</i> Crear Nuevo Repuesto
+        </a>
+    </div>
+    
+    {% if repuestos and repuestos.items %}
+    <div class="row">
+        {% for repuesto in repuestos.items %}
+        <div class="col-12 col-md-6 col-lg-4 mb-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <div class="d-flex align-items-center mb-3">
+                        <i class="material-icons text-primary" style="font-size: 32px;">smartphone</i>
+                        <h5 class="card-title ms-2 mb-0">{{ repuesto.nombre_repuesto }}</h5>
+                    </div>
+                    <p class="card-text">
+                        {% if repuesto.descripcion_repuesto|length > 100 %}
+                            {{ repuesto.descripcion_repuesto[:100] }}...
+                        {% else %}
+                            {{ repuesto.descripcion_repuesto }}
+                        {% endif %}
+                    </p>
+                    <h4 class="text-success mb-3">
+                        <i class="bi bi-currency-dollar"></i> {{ repuesto.precio_repuesto }}
+                    </h4>
+                    <div class="d-flex gap-2">
+                        <a href="{{ url_for('repuestos.editar', id=repuesto.id) }}" class="btn btn-warning flex-fill">
+                            <i class="bi bi-pencil"></i> Editar
+                        </a>
+                        <form method="POST" action="{{ url_for('repuestos.eliminar', id=repuesto.id) }}" class="flex-fill" onsubmit="return confirmarEliminacion()">
+                            <button type="submit" class="btn btn-danger w-100">
+                                <i class="bi bi-trash"></i> Eliminar
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    
+    <!-- Paginación -->
+    {% if repuestos.pages > 1 %}
+    <nav aria-label="Paginación de repuestos" class="mt-4">
+        <ul class="pagination justify-content-center">
+            {% if repuestos.has_prev %}
+            <li class="page-item">
+                <a class="page-link" href="{{ url_for('repuestos.listar', page=repuestos.prev_num) }}">
+                    <i class="bi bi-chevron-left"></i> Anterior
+                </a>
+            </li>
+            {% else %}
+            <li class="page-item disabled">
+                <span class="page-link">Anterior</span>
+            </li>
+            {% endif %}
+            
+            {% for num in repuestos.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+                {% if num %}
+                    {% if num == repuestos.page %}
+                    <li class="page-item active">
+                        <span class="page-link">{{ num }}</span>
+                    </li>
+                    {% else %}
+                    <li class="page-item">
+                        <a class="page-link" href="{{ url_for('repuestos.listar', page=num) }}">{{ num }}</a>
+                    </li>
+                    {% endif %}
+                {% else %}
+                <li class="page-item disabled">
+                    <span class="page-link">...</span>
+                </li>
+                {% endif %}
+            {% endfor %}
+            
+            {% if repuestos.has_next %}
+            <li class="page-item">
+                <a class="page-link" href="{{ url_for('repuestos.listar', page=repuestos.next_num) }}">
+                    Siguiente <i class="bi bi-chevron-right"></i>
+                </a>
+            </li>
+            {% else %}
+            <li class="page-item disabled">
+                <span class="page-link">Siguiente</span>
+            </li>
+            {% endif %}
+        </ul>
+    </nav>
+    {% endif %}
+    
+    {% else %}
+    <div class="alert alert-info text-center">
+        <i class="material-icons" style="font-size: 48px;">inbox</i>
+        <h4 class="mt-3">No hay repuestos registrados</h4>
+        <p>Comienza creando tu primer repuesto.</p>
+        <a href="{{ url_for('repuestos.crear') }}" class="btn btn-success">
+            <i class="material-icons">add_circle</i> Crear Primer Repuesto
+        </a>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

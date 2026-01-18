@@ -1,0 +1,187 @@
+/* LIAN REPUESTOS - Estilos Personalizados */
+
+/* Variables de Colores */
+:root {
+    --color-primary: #1976D2;
+    --color-success: #4CAF50;
+    --color-danger: #F44336;
+    --color-background: #F5F5F5;
+}
+
+/* Fondo General */
+body {
+    background-color: var(--color-background);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Navbar Personalizado */
+.navbar-brand {
+    font-weight: bold;
+    font-size: 1.25rem;
+}
+
+.navbar-brand .material-icons {
+    vertical-align: middle;
+}
+
+/* Cards de Repuestos */
+.card {
+    border-radius: 8px;
+    transition: transform 0.2s, box-shadow 0.2s;
+    border: none;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+}
+
+.card-body {
+    padding: 1.5rem;
+}
+
+/* Descripción Truncada */
+.card-text {
+    color: #666;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    min-height: 50px;
+}
+
+/* Precio Destacado */
+.text-success {
+    font-weight: bold;
+    font-size: 1.25rem;
+    color: var(--color-success) !important;
+}
+
+/* Botones Personalizados */
+.btn {
+    border-radius: 6px;
+    font-weight: 500;
+    transition: all 0.3s;
+}
+
+.btn:hover {
+    transform: scale(1.05);
+}
+
+.btn-primary {
+    background-color: var(--color-primary);
+    border-color: var(--color-primary);
+}
+
+.btn-success {
+    background-color: var(--color-success);
+    border-color: var(--color-success);
+}
+
+.btn-danger {
+    background-color: var(--color-danger);
+    border-color: var(--color-danger);
+}
+
+/* Grid Responsive para Cards de Repuestos */
+/* Móvil: 1 card por fila (320px - 767px) */
+@media (max-width: 767px) {
+    .col-12.mb-4 {
+        margin-bottom: 1rem !important;
+    }
+    
+    .card-body {
+        padding: 1rem;
+    }
+    
+    .d-flex.gap-2 {
+        flex-direction: column;
+    }
+    
+    .d-flex.gap-2 .btn {
+        width: 100%;
+    }
+}
+
+/* Laptop: 2 cards por fila (768px - 1199px) */
+@media (min-width: 768px) and (max-width: 1199px) {
+    .col-md-6.mb-4 {
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+}
+
+/* Pantalla Grande: 3 cards por fila (1200px+) */
+@media (min-width: 1200px) {
+    .col-lg-4.mb-4 {
+        flex: 0 0 33.333333%;
+        max-width: 33.333333%;
+    }
+}
+
+/* Formularios */
+.form-control:focus {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 0.2rem rgba(25, 118, 210, 0.25);
+}
+
+.form-label {
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+.form-label .material-icons,
+.form-label .bi {
+    vertical-align: middle;
+    margin-right: 0.25rem;
+}
+
+/* Paginación */
+.pagination .page-link {
+    color: var(--color-primary);
+    border-color: #dee2e6;
+}
+
+.pagination .page-item.active .page-link {
+    background-color: var(--color-primary);
+    border-color: var(--color-primary);
+}
+
+.pagination .page-link:hover {
+    color: var(--color-primary);
+    background-color: #e9ecef;
+}
+
+/* Alertas Flash */
+.alert {
+    border-radius: 6px;
+    border: none;
+}
+
+/* Iconos Material */
+.material-icons {
+    vertical-align: middle;
+}
+
+/* Espaciado Personalizado */
+.mt-custom {
+    margin-top: 3rem;
+}
+
+/* Títulos */
+h2, h4 {
+    color: #333;
+}
+
+/* Mejoras Visuales Generales */
+.shadow-sm {
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) !important;
+}
+
+.shadow {
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+}
+
+/* Loading State (si es necesario en el futuro) */
+.loading {
+    opacity: 0.6;
+    pointer-events: none;
+}
